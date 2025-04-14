@@ -72,13 +72,12 @@ class User extends Authenticatable
      * Retrieve the school of the user
      */
 
-    /**
-     * @return (Model&object)|null
-     */
+    public function schools() {
+        return $this->belongsToMany(School::class, 'users_schools')->withPivot('role');
+    }
+
     public function school() {
-        // With this, the user can only have 1 school
-        return $this->belongsToMany(School::class, 'users_schools')
-            ->withPivot('role')
-            ->first();
+        // Retourne la première école liée, utile pour les cas où un user a une seule école
+        return $this->schools()->first();
     }
 }

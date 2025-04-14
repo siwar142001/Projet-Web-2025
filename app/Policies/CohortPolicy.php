@@ -13,8 +13,12 @@ class CohortPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->school()->pivot->role == 'admin';
+        $school = $user->schools()->first();
+
+        return $school && $school->pivot && $school->pivot->role === 'admin';
     }
+
+
 
     /**
      * Determine whether the user can view the model.

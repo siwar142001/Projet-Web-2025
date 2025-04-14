@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CohortController;
 use App\Http\Controllers\CommonLifeController;
+use App\Http\Controllers\CommunalTaskController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RetroController;
@@ -45,6 +46,17 @@ Route::middleware('auth')->group(function () {
 
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
+
+
+        // // Communal Tasks (Admin only)
+        Route::middleware(['auth', 'is_admin'])->group(function () {
+            Route::get('communal-tasks.index', [CommunalTaskController::class, 'index'])->name('communal-tasks.index');
+            // autres routes protégées admin
+
+            Route::post('/communal-tasks.index', [CommunalTaskController::class, 'store'])->name('communal-tasks.store');
+            Route::resource('communal-tasks', CommunalTaskController::class);
+        });
+
     });
 
 });
