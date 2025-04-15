@@ -90,6 +90,18 @@ class CommunalTaskController extends Controller
 
 
 
+    public function history()
+    {
+        $user = auth()->user();
+
+        $tasks = $user->completedTasks()->withPivot('comment', 'completed_at')->get();
+
+        return view('pages.commonLife.history', compact('tasks'));
+    }
+
+
+
+
 
 
 

@@ -38,9 +38,17 @@
 
         <!-- Liste des tâches -->
         <div class="mt-10">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">Tâches Communes</h2>
+            <div>
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">Tâches Communes     <a href="{{ route('communal-tasks.history') }}" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">🕓 Historique</a></h2>
 
-            @if($tasks->isEmpty())
+
+            </div>
+
+
+            </div>
+
+
+        @if($tasks->isEmpty())
                 <p class="text-gray-500">Aucune tâche n’a encore été créée.</p>
             @else
                 <ul class="space-y-4">

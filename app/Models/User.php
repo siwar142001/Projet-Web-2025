@@ -84,7 +84,7 @@ class User extends Authenticatable
 
     public function completedTasks()
     {
-        return $this->belongsToMany(CommunalTask::class)
+        return $this->belongsToMany(CommunalTask::class, 'communal_task_user')
             ->withPivot('comment', 'completed_at')
             ->withTimestamps();
     }

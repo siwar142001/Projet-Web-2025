@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
         // Retro
         route::get('retros', [RetroController::class, 'index'])->name('retro.index');
 
+        Route::get('/communal-tasks/history', [\App\Http\Controllers\CommunalTaskController::class, 'history'])->name('communal-tasks.history');
+
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
         Route::post('/communal-tasks/{id}/complete', [CommunalTaskController::class, 'complete'])->name('communal-tasks.complete');
