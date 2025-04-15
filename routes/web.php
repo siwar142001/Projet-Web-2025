@@ -46,16 +46,16 @@ Route::middleware('auth')->group(function () {
 
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
-
+        Route::post('/communal-tasks/{id}/complete', [CommunalTaskController::class, 'complete'])->name('communal-tasks.complete');
 
         // // Communal Tasks (Admin only)
-        Route::middleware(['auth', 'is_admin'])->group(function () {
+        //Route::middleware(['auth', 'is_admin'])->group(function () {
             Route::get('communal-tasks.index', [CommunalTaskController::class, 'index'])->name('communal-tasks.index');
             // autres routes protégées admin
 
             Route::post('/communal-tasks.index', [CommunalTaskController::class, 'store'])->name('communal-tasks.store');
             Route::resource('communal-tasks', CommunalTaskController::class);
-        });
+        //});
 
     });
 

@@ -19,6 +19,10 @@ class CommunalTaskController extends Controller
 
 
 
+    /**
+     * Store a newly created resource in storage.
+     */
+
     public function store(Request $request) {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -30,42 +34,65 @@ class CommunalTaskController extends Controller
 
     }
 
-    public function update($id) {
+    public function edit($id)
+    {
         $task = CommunalTask::findOrFail($id);
-        return view('communal_tasks.edit', compact('task'));
+        return view('pages.commonLife.index', [
+            'tasks' => CommunalTask::all(),
+            'taskToEdit' => $task
+        ]);
     }
 
-    public function edit(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
 
         $task = CommunalTask::findOrFail($id);
-        $task->update($request->all());
-        return redirect()->route('communal-tasks.index')->with('success', 'Tâche mise à jour.');
+        $task->update($request->only(['title', 'description']));
+
+        return redirect()->route('communal-tasks.index')->with('success', 'Tâche mise à jour avec succès.');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
 
     public function destroy($id) {
         CommunalTask::findOrFail($id)->delete();
         return redirect()->route('communal-tasks.index')->with('success', 'Tâche supprimée.');
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
 
 
 
+    public function complete(Request $request, $id)
+    {
+        $task = CommunalTask::findOrFail($id);
+
+        if ($task->completedBy->contains(auth()->id())) {
+            return back()->with('error', 'Tâche déjà complétée.');
+        }
+
+        $request->validate([
+            'comment_hidden' => 'required|string'
+        ]);
+
+        $task->completedBy()->attach(auth()->id(), [
+            'comment' => $request->comment_hidden,
+            'completed_at' => now(),
+        ]);
+
+        return back()->with('success', 'Tâche validée avec succès !');
+    }
 
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+
+
+
+
 
 }

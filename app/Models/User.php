@@ -80,4 +80,13 @@ class User extends Authenticatable
         // Retourne la première école liée, utile pour les cas où un user a une seule école
         return $this->schools()->first();
     }
+
+
+    public function completedTasks()
+    {
+        return $this->belongsToMany(CommunalTask::class)
+            ->withPivot('comment', 'completed_at')
+            ->withTimestamps();
+    }
+
 }
