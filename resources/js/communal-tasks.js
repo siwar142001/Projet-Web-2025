@@ -1,7 +1,6 @@
 
-
-
-window.openEditModal = function (element) {
+console.log("file work");
+function openEditModal (element) {
     const task = JSON.parse(element.getAttribute('data-user'));
 
     document.getElementById('edit_title').value = task.title;
@@ -12,3 +11,5 @@ window.openEditModal = function (element) {
 
     document.getElementById('task-modal').classList.remove('hidden');
 }
+
+window.openEditModal = openEditModal;

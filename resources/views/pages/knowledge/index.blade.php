@@ -11,7 +11,7 @@
     <div class="py-6 px-4 mx-auto max-w-7xl">
 
         {{-- Si l'utilisateur est admin, on lui montre le formulaire --}}
-        @if(auth()->user()->schools()->first()?->pivot->role === 'admin')
+        @if(auth()->user()->schools()->first()?->pivot->role === 'admin' || 'teacher')
             <div class="bg-white rounded-lg shadow p-6 mb-8">
                 <h2 class="text-xl font-semibold mb-4">🎯 Générer un bilan de compétence</h2>
 

@@ -1,9 +1,7 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
-
-import './communal-tasks.js';
-
+import './communal-tasks'
 
 window.Alpine = Alpine;
 

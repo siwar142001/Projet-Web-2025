@@ -12,8 +12,6 @@
     <link href="{{ asset('metronic/vendors/keenicons/styles.bundle.css') }}" rel="stylesheet"/>
     <link href="{{ asset('metronic/css/styles.css') }}" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="{{ asset('scss/communal-tasks.css') }}">
-
 
 </head>
 <body class="antialiased flex h-full text-base text-gray-700 [--tw-page-bg:#F6F6F9] [--tw-page-bg-dark:var(--tw-coal-200)]
@@ -89,78 +87,7 @@
 <script src="{{ asset('metronic/vendors/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('metronic/js/widgets/general.js') }}"></script>
 <script src="//unpkg.com/alpinejs" defer></script>
-
-
-
-<script>
-    // Ajouter ce script à la fin de votre app.blade.php, juste avant la fermeture de la balise body
-    document.addEventListener('DOMContentLoaded', function() {
-        // Récupérer tous les boutons qui ouvrent une modal
-        const modalTriggers = document.querySelectorAll('[data-modal="true"]:not(.fixed)');
-
-        // Récupérer toutes les modals
-        const modals = document.querySelectorAll('.fixed[data-modal="true"]');
-
-        // Récupérer tous les boutons qui ferment une modal
-        const dismissButtons = document.querySelectorAll('[data-modal-dismiss="true"]');
-
-        // Fonction pour ouvrir une modal
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            }
-        }
-
-        // Fonction pour fermer une modal
-        function closeModal(modal) {
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
-
-        // Ajouter les écouteurs d'événements pour les déclencheurs de modal
-        modalTriggers.forEach(trigger => {
-            trigger.addEventListener('click', function() {
-                const modalId = this.getAttribute('data-modal-target');
-                openModal(modalId);
-            });
-        });
-
-        // Ajouter les écouteurs d'événements pour les boutons de fermeture
-        dismissButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const modal = this.closest('.fixed[data-modal="true"]');
-                if (modal) {
-                    closeModal(modal);
-                }
-            });
-        });
-
-        // Fermer la modal quand on clique en dehors du contenu
-        modals.forEach(modal => {
-            modal.addEventListener('click', function(event) {
-                if (event.target === this) {
-                    closeModal(this);
-                }
-            });
-        });
-
-        // Fermer la modal avec la touche Escape
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                modals.forEach(modal => {
-                    if (!modal.classList.contains('hidden')) {
-                        closeModal(modal);
-                    }
-                });
-            }
-        });
-    });
-</script>
-
-
-
+<script src="{{ mix('js/app.js') }}"></script>
 
 <!-- End of Scripts -->
 </body>
