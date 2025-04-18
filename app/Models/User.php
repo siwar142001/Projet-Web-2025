@@ -76,6 +76,11 @@ class User extends Authenticatable
         return $this->belongsToMany(School::class, 'users_schools')->withPivot('role');
     }
 
+    public function knowledgeTests()
+    {
+        return $this->hasMany(KnowledgeTest::class);
+    }
+
     public function school() {
         // Retourne la première école liée, utile pour les cas où un user a une seule école
         return $this->schools()->first();
@@ -88,5 +93,15 @@ class User extends Authenticatable
             ->withPivot('comment', 'completed_at')
             ->withTimestamps();
     }
+
+
+    public function userSchool()
+    {
+        return $this->hasOne(UserSchool::class)->where('school_id', currentSchoolId()); // ou la l
+    }
+
+
+
+
 
 }

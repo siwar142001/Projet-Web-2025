@@ -12,6 +12,8 @@
     <link href="{{ asset('metronic/vendors/keenicons/styles.bundle.css') }}" rel="stylesheet"/>
     <link href="{{ asset('metronic/css/styles.css') }}" rel="stylesheet"/>
 
+    <link rel="stylesheet" href="{{ asset('scss/communal-tasks.css') }}">
+
 
 </head>
 <body class="antialiased flex h-full text-base text-gray-700 [--tw-page-bg:#F6F6F9] [--tw-page-bg-dark:var(--tw-coal-200)]
@@ -163,3 +165,4 @@
 <!-- End of Scripts -->
 </body>
 </html>
+

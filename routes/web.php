@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
         // Knowledge
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');
 
+        Route::get('/knowledge/{test}', [KnowledgeController::class, 'show'])->name('knowledge.show');
+
         // Groups
         Route::get('groups', [GroupController::class, 'index'])->name('group.index');
 
@@ -57,6 +59,8 @@ Route::middleware('auth')->group(function () {
 
             Route::post('/communal-tasks.index', [CommunalTaskController::class, 'store'])->name('communal-tasks.store');
             Route::resource('communal-tasks', CommunalTaskController::class);
+            Route::post('/knowledge/generate', [KnowledgeController::class, 'generate'])->name('knowledge.generate');
+
         //});
 
     });

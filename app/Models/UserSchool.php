@@ -8,4 +8,10 @@ class UserSchool extends Model
 {
     protected $table        = 'users_schools';
     protected $fillable     = ['user_id', 'school_id', 'role', 'active'];
+
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin'; //
+    }
 }
