@@ -10440,6 +10440,9 @@ process.umask = function() { return 0; };
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _communal_tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./communal-tasks */ "./resources/js/communal-tasks.js");
+/* harmony import */ var _communal_tasks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_communal_tasks__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
@@ -10459,6 +10462,25 @@ __webpack_require__.r(__webpack_exports__);
 
 window.axios = axios__WEBPACK_IMPORTED_MODULE_0__["default"];
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+/***/ }),
+
+/***/ "./resources/js/communal-tasks.js":
+/*!****************************************!*\
+  !*** ./resources/js/communal-tasks.js ***!
+  \****************************************/
+/***/ (() => {
+
+console.log("file work");
+function openEditModal(element) {
+  var task = JSON.parse(element.getAttribute('data-user'));
+  document.getElementById('edit_title').value = task.title;
+  document.getElementById('edit_description').value = task.description;
+  var form = document.getElementById('edit_task_form');
+  form.action = "/communal-tasks/".concat(task.id);
+  document.getElementById('task-modal').classList.remove('hidden');
+}
+window.openEditModal = openEditModal;
 
 /***/ }),
 
@@ -10534,6 +10556,18 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	

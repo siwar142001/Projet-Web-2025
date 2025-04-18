@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CohortController;
 use App\Http\Controllers\CommonLifeController;
+use App\Http\Controllers\CommunalTaskController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RetroController;
@@ -37,14 +38,31 @@ Route::middleware('auth')->group(function () {
         // Knowledge
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');
 
+        Route::get('/knowledge/{test}', [KnowledgeController::class, 'show'])->name('knowledge.show');
+
         // Groups
         Route::get('groups', [GroupController::class, 'index'])->name('group.index');
 
         // Retro
         route::get('retros', [RetroController::class, 'index'])->name('retro.index');
 
+        Route::get('/communal-tasks/history', [\App\Http\Controllers\CommunalTaskController::class, 'history'])->name('communal-tasks.history');
+
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
+        Route::post('/communal-tasks/{id}/complete', [CommunalTaskController::class, 'complete'])->name('communal-tasks.complete');
+
+        // // Communal Tasks (Admin only)
+        //Route::middleware(['auth', 'is_admin'])->group(function () {
+            Route::get('communal-tasks.index', [CommunalTaskController::class, 'index'])->name('communal-tasks.index');
+            // autres routes protégées admin
+
+            Route::post('/communal-tasks.index', [CommunalTaskController::class, 'store'])->name('communal-tasks.store');
+            Route::resource('communal-tasks', CommunalTaskController::class);
+            Route::post('/knowledge/generate', [KnowledgeController::class, 'generate'])->name('knowledge.generate');
+
+        //});
+
     });
 
 });
